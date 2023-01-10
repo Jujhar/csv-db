@@ -1,17 +1,20 @@
+
+## CSV DB
 Just a small script to enable a place to store and read data.
 
-## Actions
-### Read
+#### Actions
+##### Display file
 main.php?action=list
 
-### Write
+##### Write
 main.php?action=addm&values=csv,row,here
 
-### Show last row
+##### Display last row
 main.php?action=last
 
-### Show path of csv
+##### Get path of csv
 main.php?action=path
 
-## Config
+
+### Config
 path - file path for data file
