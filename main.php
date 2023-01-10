@@ -3,11 +3,11 @@
 // CONFIG
 $path = 'name.txt'; // file path
 
-// values = load (10), add (26), list (34), last (41)
+// Values = load (11), add (27), last (35), path (54)
 $action = filter_var($_GET['action']);
 $values = filter_var($_GET['values']);
 
-// display file data
+// Display file data
 if ($action == 'load' || $action == 'read' || $action == 'list') {
   $row = 1;
   if (($handle = fopen($path, "r")) !== FALSE) {
@@ -23,7 +23,7 @@ if ($action == 'load' || $action == 'read' || $action == 'list') {
   }
 }
 
-// add row
+// Add row
 else if ($action == 'add' || $action == 'new') {
   $fp = fopen($path, 'a');
   echo $values . "<br> Added";
@@ -31,14 +31,7 @@ else if ($action == 'add' || $action == 'new') {
   fclose($fp);
 }
 
-// list url of csv output
-else if ($action == 'path' || $action == 'dir') {
-   $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-   $url = explode("main.php", $url);
-   echo $url[0] . $path;
-}
-
-// get last row
+// Get last row
 else if ($action == 'last' || $action == 'end') {
   $row = 1;
   $last = '';
@@ -55,11 +48,25 @@ else if ($action == 'last' || $action == 'end') {
   echo $last;
 }
 
+// List url of csv output
+else if ($action == 'path' || $action == 'dir') {
+   $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+   $url = explode("main.php", $url);
+   echo $url[0] . $path;
+}
+
 else {
   $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
   $url = explode("main.php", $url);
   echo $url[0] . "readme.md";
 }
-//add row (unique)
+
+// Display file location
+if ($action != 'path' && $action != 'dir') {
+   $url = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+   $url = explode("main.php", $url);
+   echo "<br><br><small>File located at: " . $url[0] . $path . "</small>";
+}
+// Add row (unique)
 //TODO check if row there
 ?>
